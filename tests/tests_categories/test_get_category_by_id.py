@@ -7,14 +7,14 @@ from check_response import check_id
 
 
 class TestGetCategoryById:
-    @allure.title('Проверка: по запросу GET /api/categories/{id} получаем категорию c правильным id')
+    @allure.title('По запросу GET /api/categories/{id} получаем категорию c нужным id')
     def test_get_category_by_id_success(self):
         response = requests.get(URL.CATEGORIES + str(Test.CATEGORY_ID), timeout=10)
         result = check_id(response.json(), Test.CATEGORY_ID)
         assert response.status_code == 200 and result == "Correct"
 
-    @allure.title('Проверка: если передать неверный id категории (несуществующий или невалидный - буквы и тд), '
-                  'вернётся ошибка 404')
+    @allure.title('Если по запросу GET /api/categories/{id} передать неверный id категории '
+                  '(несуществующий или невалидный - буквы и тд), вернётся ошибка 404')
     @pytest.mark.parametrize('category_id, error_message', [
         ("666", Message.NON_EXISTENT_CATEGORY),
         ("pu-pu-pu", Message.PAGE_NOT_FOUND)])

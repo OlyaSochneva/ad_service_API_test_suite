@@ -1,5 +1,5 @@
 class Sample:
-    LIST_STRUCTURE = {      # Categories/Cards/Cities
+    LIST_STRUCTURE = {
         "count": "",
         "next": "",
         "previous": "",
@@ -19,6 +19,7 @@ class Sample:
         "id": "",
         "name": "",
         "slug": "",
+        "big_parent": "",
         "children": [],
         "image": ""
     }
@@ -28,9 +29,11 @@ class Sample:
         "author": {},
         "is_favorite": "",
         "favorite_count": "",
+        "promo": "",
         "title": "",
         "description": "",
         "created_at": "",
+        "active_at": "",
         "views": "",
         "connect_method": "",
         "status": "",
@@ -39,16 +42,18 @@ class Sample:
         "category": {},
         "city": {}
     }
+
     SERVICE_CARD_STRUCTURE = {
         "id": "",
         "image": [],
         "author": {},
         "is_favorite": "",
         "favorite_count": "",
+        "promo": "",
         "title": "",
         "description": "",
         "created_at": "",
-        "updated_at": "",
+        "active_at": "",
         "views": "",
         "connect_method": "",
         "status": "",
@@ -58,19 +63,21 @@ class Sample:
         "city": {}
     }
     VEHICLE_CARD_STRUCTURE = {
-        "id": 208,
+        "id": "",
         "image": [],
         "author": {},
         "is_favorite": "",
         "favorite_count": "",
+        "promo": "",
         "title": "",
         "description": "",
         "created_at": "",
-        "updated_at": "",
+        "active_at": "",
         "views": "",
         "connect_method": "",
         "status": "",
         "price": "",
+        "new_or_used": "",
         "year": "",
         "make": "",
         "body_type": "",
@@ -94,5 +101,18 @@ class Sample:
         "name": "",
         "country": "",
         "region": ""
+    }
+    NOTIFICATION_CREATED_STRUCTURE = {
+        "id": "",
+        "title": "",
+        "description": "",
+        "created_at": "",
+        "users": []
+    }
+    NOTIFICATION_STRUCTURE = {
+        "id": "",
+        "notification": {},
+        "user_notification": {},
+        "is_read": ""
     }
 

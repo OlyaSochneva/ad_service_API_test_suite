@@ -1,13 +1,19 @@
 from response_samples import Sample
 from data import Data
-from assistant_methods import check_structure
+from assistant_methods import compare_keys
 from assistant_methods import return_id
 from assistant_methods import return_category
 from assistant_methods import compare_names
 from assistant_methods import return_card_category
 
 
-def check_response_structure(response, check_method, sample):
+def check_item_structure(item, sample):
+    if compare_keys(item, sample):
+        return "Correct"
+    return "Wrong response structure"
+
+
+def check_list_structure(response, check_method, sample):
     if response.keys() != Sample.LIST_STRUCTURE.keys():
         return "Wrong response structure"
     data = response['results']
@@ -23,7 +29,7 @@ def check_response_structure(response, check_method, sample):
 
 
 def check_category(category, category_sample):
-    if not check_structure(category, category_sample):
+    if not compare_keys(category, category_sample):
         return False
     if len(category['children']) > 0:
         for child in category['children']:
@@ -34,37 +40,18 @@ def check_category(category, category_sample):
 
 def check_card(card, type_of_card_sample):
     return (
-            check_structure(card, type_of_card_sample) and
-            check_structure(card['author'], Sample.AUTHOR_STRUCTURE) and
-            check_structure(card['city'], Sample.CITY_STRUCTURE))
+            compare_keys(card, type_of_card_sample) and
+            compare_keys(card['author'], Sample.AUTHOR_STRUCTURE) and
+            compare_keys(card['city'], Sample.CITY_STRUCTURE))
 
 
-def check_user(user, user_sample):
-    return check_structure(user, user_sample)
-
-
-def check_city(city, city_sample):
-    return check_structure(city, city_sample)
-
-
-def check_cards_category(response, category_name):
+def check_values(item, sample):
+    if not check_item_structure(item, sample):
+        return "Wrong response structure"
     errors = []
-    for card in response['results']:
-        card_category = return_card_category(card)
-        if card_category != category_name:
-            errors.append(f"У карточки id {card['id']} другая категория: {card_category}")
-    if errors:
-        for error in errors:
-            print(error)
-        return "Wrong data in response"
-    return "Correct"
-
-
-def check_values(response_dict, sample):
-    errors = []
-    for key in response_dict:
-        if response_dict[key] != sample[key]:
-            errors.append(f"Значение '{key}' отличается от образца: {response_dict[key]} != {sample[key]}")
+    for key in item:
+        if item[key] != sample[key]:
+            errors.append(f"Значение '{key}' отличается от образца: {item[key]} != {sample[key]}")
     if errors:
         for error in errors:
             print(error)
@@ -80,12 +67,25 @@ def check_id(response_dict, id_sample):
     return "Correct"
 
 
+def check_cards_category(response, category_name):
+    errors = []
+    for card in response['results']:
+        card_category = return_card_category(card)
+        if card_category != category_name:
+            errors.append(f"У карточки id {card['id']} другая категория: {card_category}")
+    if errors:
+        for error in errors:
+            print(error)
+        return "Wrong data in response"
+    return "Correct"
+
+
 def check_categories_names(response):
     categories = response['results']
     return compare_names(categories, Data.CATEGORIES_LIST)
 
 
-def check_subcategories_names(response, category_name, names_list_sample):
+def check_subcategories_names(response, category_name, sample):
     parent_category = return_category(response, category_name)
     subcategories = parent_category['children']
-    return compare_names(subcategories, names_list_sample)
+    return compare_names(subcategories, sample)

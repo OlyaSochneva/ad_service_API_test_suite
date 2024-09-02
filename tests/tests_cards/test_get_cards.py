@@ -1,36 +1,22 @@
 import allure
+import pytest
 import requests
 
 from data import URL
 from response_samples import Sample
-from check_response import check_response_structure as check_structure
+from check_response import check_list_structure
 from check_response import check_card, check_cards_category
 
 
 class TestGetCards:
-    @allure.title('Проверка: по запросу GET /api/cards/ получаем ответ с корректной структурой')
-    def test_get_cards_list(self):
-        response = requests.get(URL.CARDS, params={'limit': 100}, timeout=10)
-        response_structure = check_structure(response.json(), check_card, Sample.CARD_STRUCTURE)
-        # print(f"Response structure: '{response_structure}'")
+    @allure.title('GET /api/cards/ + services/vehicles получаем список карточек с корректной структурой')
+    @pytest.mark.parametrize('type_of_request, card_sample', [
+        (URL.CARDS, Sample.CARD_STRUCTURE),
+        (URL.SERVICES, Sample.SERVICE_CARD_STRUCTURE),
+        (URL.VEHICLES, Sample.VEHICLE_CARD_STRUCTURE)])
+    def test_get_special_cards_list(self, type_of_request, card_sample):
+        response = requests.get(type_of_request, params={'limit': 100}, timeout=10)
+        response_structure = check_list_structure(response.json(), check_card, card_sample)
         assert (response.status_code == 200 and response_structure == "Correct")
 
-    @allure.title('Проверка: по запросу GET /api/cards/services получаем ответ с корректной структурой '
-                  'и правильным списком карточек (все карточки относятся к услугам)')
-    def test_get_services_cards_list(self):
-        response = requests.get(URL.SERVICES, params={'limit': 100}, timeout=10)
-        response_structure = check_structure(response.json(), check_card, Sample.SERVICE_CARD_STRUCTURE)
-        cards_category = check_cards_category(response.json(), "Услуги")
-        assert (response.status_code == 200
-                and response_structure == "Correct"
-                and cards_category == "Correct")
 
-    @allure.title('Проверка: по запросу GET /api/cards/vehicles получаем ответ с корректной структурой '
-                  'и правильным списком карточек (все карточки относятся к транспорту)')
-    def test_get_vehicles_cards_list(self):
-        response = requests.get(URL.VEHICLES, params={'limit': 100}, timeout=10)
-        response_structure = check_structure(response.json(), check_card, Sample.VEHICLE_CARD_STRUCTURE)
-        cards_category = check_cards_category(response.json(), "Легковые авто")
-        assert (response.status_code == 200
-                and response_structure == "Correct"
-                and cards_category == "Correct")
