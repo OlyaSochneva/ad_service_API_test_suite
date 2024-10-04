@@ -7,7 +7,7 @@ from check_response import check_id
 
 
 class TestGetUser:
-    @allure.title('По запросу GET /api/users/{id} получаем ответ с нужным пользователем')
+    @allure.title('По запросу GET /api/users/{id} получаем нужного пользователя')
     def test_get_user_by_id_success(self, new_user_id_and_token):
         user_id = new_user_id_and_token["id"]
         response = requests.get(URL.USERS + str(user_id), timeout=10)

@@ -19,7 +19,7 @@ class TestGetUserByToken:
     @allure.title('Если не передать токен или передать невалидный, будет ошибка 401')
     @pytest.mark.parametrize('headers, error_message', [
         (None, Message.CREDENTIALS_NOT_FOUND),
-        ({'Authorization': f'Bearer {generate_random_string(10)}'}, Message.INVALID_TOKEN)
+        ({'Authorization': f'Bearer {generate_random_string(15)}'}, Message.INVALID_TOKEN)
     ])
     def test_get_user_unauthorized_causes_error(self, headers, error_message):
         response = requests.get(URL.USER_ME, headers=headers)

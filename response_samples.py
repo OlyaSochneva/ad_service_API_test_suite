@@ -13,7 +13,8 @@ class Sample:
         "phone_number": "",
         "avatar": "",
         "date_joined": "",
-        "count_cards": ""
+        "count_cards": "",
+        "count_notifications": ""
     }
     CATEGORY_STRUCTURE = {
         "id": "",
@@ -38,7 +39,10 @@ class Sample:
         "connect_method": "",
         "status": "",
         "price": "",
+        "price_type": "",
         "new_or_used": "",
+        "need_correct": "",
+        "comment": "",
         "category": {},
         "city": {}
     }
@@ -59,6 +63,8 @@ class Sample:
         "status": "",
         "price": "",
         "price_type": "",
+        "need_correct": "",
+        "comment": "",
         "category": {},
         "city": {}
     }

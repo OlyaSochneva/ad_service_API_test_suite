@@ -11,9 +11,7 @@ class TestGetNotificationById:
     @allure.title('По запросу GET /api/notifications/{id} получаем уведомление c нужным id')
     def test_get_notification_by_id_success(self, new_notification_id_and_user_token):
         token = new_notification_id_and_user_token["token"]
-        print(token)
         user_ntf_id = new_notification_id_and_user_token["id"]
-        print(user_ntf_id)
         response = requests.get(URL.NOTIFICATIONS + str(user_ntf_id), headers={'Authorization': f'Bearer {token}'})
         result = check_id(response.json(), user_ntf_id)
         assert (response.status_code == 200 and result == "Correct")

@@ -11,12 +11,10 @@ from check_response import check_item_structure
 class TestCreateNotification:
     @allure.title('По запросу POST /api/notifications/ с корректными данными можно создать новое уведомление')
     def test_create_notification_for_one_user_success(self, new_notification_payload):
-        #print(admin_token)
         payload = new_notification_payload
         response = requests.post(URL.NOTIFICATIONS,
                                  headers={'Authorization': f'Bearer {Test.ADMIN_TOKEN}'},
                                  json=payload)
-        print(response.json())
         response_structure = check_item_structure(response.json(), Sample.NOTIFICATION_CREATED_STRUCTURE)
         assert (response.status_code == 201 and response_structure == "Correct")
 
@@ -39,14 +37,23 @@ class TestCreateNotification:
         response = requests.post(URL.NOTIFICATIONS, headers=headers, json=payload)
         assert (response.status_code == 401 and error_message in str(response.json()))
 
-    @allure.title('POST /api/notifications/ если одно из обязательных полей отсутствует, вернётся ошибка 401')
+    @allure.title('Нельзя создать уведомление, если список users пустой')
+    def test_create_notification_without_users_causes_error(self, new_notification_payload):
+        payload = new_notification_payload
+        payload["users"] = []
+        response = requests.post(URL.NOTIFICATIONS, headers={'Authorization': f'Bearer {Test.ADMIN_TOKEN}'},
+                                 json=payload)
+        assert response.status_code == 400 and Message.EMPTY_USERS_LIST
+
+    @allure.title('Нельзя создать уведомление, если одно из обязательных полей отсутствует')
     @pytest.mark.parametrize('deleted_field', ["title", "description", "users"])
     def test_create_new_notification_without_required_field_causes_error(self, new_notification_payload, deleted_field):
         payload = new_notification_payload
         payload.pop(deleted_field)
         response = requests.post(URL.NOTIFICATIONS, headers={'Authorization': f'Bearer {Test.ADMIN_TOKEN}'},
                                  json=payload)
-        assert response.status_code == 401
+        print(response.json())
+        assert response.status_code == 400
 
 
 

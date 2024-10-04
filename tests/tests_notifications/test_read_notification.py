@@ -2,8 +2,9 @@ import allure
 import pytest
 import requests
 
-from assistant_methods import read_notification_payload, generate_random_string, unread_notification_payload
+from assistant_methods import generate_random_string
 from data import URL, Message
+from payloads import read_notification_payload, unread_notification_payload
 
 
 class TestReadNotification:
@@ -41,15 +42,28 @@ class TestReadNotification:
                                   headers={'Authorization': f'Bearer {token}'}, json=read_notification_payload())
         assert (response.status_code == 404 and error_message in str(response.json()))
 
+    @allure.title('Если не передать тело запроса, вернется ошибка 400')
+    def test_read_notification_without_payload_causes_error(self, new_notification_id_and_user_token):
+        user_ntf_id = new_notification_id_and_user_token["id"]
+        token = new_notification_id_and_user_token["token"]
+        response = requests.patch(URL.NOTIFICATIONS + str(user_ntf_id) + "/",
+                                  headers={'Authorization': f'Bearer {token}'})
+        print(response.json())
+        assert (response.status_code == 400)
+
     @allure.title('Если передать неверное тело запроса (не булево значение), вернется ошибка 400')
-    @pytest.mark.parametrize('invalid_value', ["pupupu", 15, None])
-    def test_read_notification_with_invalid_payload_causes_error(self, new_notification_id_and_user_token, invalid_value):
+    @pytest.mark.parametrize('invalid_value, error_message', [
+        ("pupupu", Message.MUST_BE_BOOLEAN),
+        (15, Message.MUST_BE_BOOLEAN),
+        (None, Message.EMPTY_FIELD)])
+    def test_read_notification_with_invalid_payload_causes_error(self, new_notification_id_and_user_token,
+                                                                 invalid_value, error_message):
         user_ntf_id = new_notification_id_and_user_token["id"]
         token = new_notification_id_and_user_token["token"]
         payload = {"is_read": invalid_value}
         response = requests.patch(URL.NOTIFICATIONS + str(user_ntf_id) + "/",
                                   headers={'Authorization': f'Bearer {token}'}, json=payload)
-        assert response.status_code == 400
-
+        print(response.json())
+        assert (response.status_code == 400 and error_message in str(response.json()))
 
 

@@ -16,9 +16,10 @@ class TestGetCategoryById:
     @allure.title('Если по запросу GET /api/categories/{id} передать неверный id категории '
                   '(несуществующий или невалидный - буквы и тд), вернётся ошибка 404')
     @pytest.mark.parametrize('category_id, error_message', [
-        ("666", Message.NON_EXISTENT_CATEGORY),
-        ("pu-pu-pu", Message.PAGE_NOT_FOUND)])
+        ("66666", Message.NON_EXISTENT_CATEGORY),
+        ("pu-pu-@pu", Message.PAGE_NOT_FOUND)])
     def test_get_category_by_wrong_id_causes_404_error(self, category_id, error_message):
         response = requests.get(URL.CATEGORIES + category_id, timeout=10)
-        assert (response.status_code == 404 and
-                error_message in str(response.json()))
+        assert (response.status_code == 404 and error_message in str(response.json()))
+
+

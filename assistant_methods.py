@@ -1,6 +1,15 @@
 import string
 import random
 
+import requests
+
+from data import URL, TestData as Test
+
+
+def return_admin_token():
+    code = requests.post(URL.SEND_CODE, data={'email': Test.USER_ADMIN['email']}).json()["confirmation_code"]
+    refresh_token = requests.post(URL.LOGIN, data={'email': Test.USER_ADMIN['email'], 'code': code}).json()["refresh"]
+    return refresh_token
 
 def compare_keys(item, sample):
     return item.keys() == sample.keys()
@@ -8,6 +17,10 @@ def compare_keys(item, sample):
 
 def return_id(response_dict):
     return response_dict['id']
+
+
+def return_card_status(card):
+    return card['status']
 
 
 def return_category(response, category_name):
@@ -33,53 +46,6 @@ def compare_names(data, sample):
     else:
         return ("Missing categories: " + ", ".join(missing_categories),
                 "Extra categories: " + ", ".join(extra_categories))
-
-
-def new_user_payload():
-    payload = {
-        "email": generate_random_email(),
-        "first_name": generate_random_string(5),
-        "phone_number": generate_phone_number(),
-    }
-    return payload
-
-
-def new_card_payload():
-    payload = {
-        "images": "",
-        "title": "Test",
-        "description": "",
-        "active_at": "",
-        "connect_method": "",
-        "price": 1000,
-        "new_or_used": "new",
-        "category": 5,
-        "city": 2
-    }
-    return payload
-
-
-def create_notification_payload(user_id):
-    payload = {
-        "title": "test notification",
-        "description": "test notification",
-        "users": [user_id]
-    }
-    return payload
-
-
-def read_notification_payload():
-    payload = {
-        "is_read": True
-    }
-    return payload
-
-
-def unread_notification_payload():
-    payload = {
-        "is_read": False
-    }
-    return payload
 
 
 def return_user_ntf_id(response, notification_id):

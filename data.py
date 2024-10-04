@@ -1,34 +1,23 @@
 class TestData:
-    CARD_ID = 6
-    SERVICE_CARD_ID = 24
-    VEHICLE_CARD_ID = 13
-    CATEGORY_ID = 7  # "Всё для сада"
-    ADMIN_TOKEN = ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNzI3ODY5NDk1fQ."
-                   "_mvGDtqgEi2Qx2mej94WEvPwRT-NV_KsEmTaG1tVj0E")
-    USER_ADMIN = {
-        "id": 1,
-        "email": "admin@localhost",
-        "first_name": "admin",
-        "last_name": None,
-        "phone_number": "admin@localhost",
-        "avatar": None,
-        "date_joined": "2024-08-20 16:07:08",
-        "count_cards": 240
-    }
+    ADMIN_TOKEN = ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyODE1"
+                   "NTc1NiwiaWF0IjoxNzI4MDY5MzU2LCJqdGkiOiJjMGI1M2UzOTk4OTk0MDFkYTBjZjU5NjAwNmMxNzM2NSIs"
+                   "ImlkIjoxfQ.IDznL9U4jn7KT_qbgAh-h14i1q5IoZCTzg3khJfzWis")
+    USER_ADMIN = {"email": "admin@localhost"}
     CITY = {
         "id": 2,
         "name": "Санкт-Петербург",
         "country": "Россия",
         "region": "Санкт-Петербург"
     }
+    CATEGORY_ID = 7  # "Всё для сада"
 
 
 class URL:
     BASE = "https://api.dev.ads.ktsf.ru/"  # бэк 2
     CATEGORIES = BASE + "/api/categories/"  # получить все категории, получить по id
     CARDS = BASE + "/api/cards/"  # получить все объявления, получить по id
-    SERVICES = CARDS + "services/"  # получить все услуги, получить по id
-    VEHICLES = CARDS + "vehicles/"  # получить все авто, получить по id
+    SERVICE_CARDS = CARDS + "services/"  # получить все услуги, получить по id
+    VEHICLE_CARDS = CARDS + "vehicles/"  # получить все авто, получить по id
     USERS = BASE + "/api/users/"  # получить всех юзеров, получить по id
     USER_ME = USERS + "/me/"
     REGISTRATION = BASE + "/api/registration/"
@@ -52,6 +41,11 @@ class Message:
     CREDENTIALS_NOT_FOUND = "Учетные данные не были предоставлены"
     INVALID_TOKEN = "Токен не верный. Проверьте ввод или заново авторизуйтесь."
     NOT_SUFFICIENT_RIGHTS = "У вас недостаточно прав для выполнения данного действия."
+    EMPTY_USERS_LIST = "Users list is empty"
+    EMPTY_FIELD = "Это поле не может быть пустым."
+    MUST_BE_BOOLEAN = "Must be a valid boolean."
+    TITLE_AND_DSCR_REQUIRED = "Title and description are required"
+    REQUIRED_FIELD = "Обязательное поле."
 
 
 class Data:

@@ -9,12 +9,23 @@ from check_response import check_category, check_categories_names, check_subcate
 
 
 class TestGetCategories:
-    @allure.title('По запросу GET /api/categories/ получаем ответ с корректной структурой и правильным списком '
-                  'всех категорий (проверяем по названиям)')
+    @allure.title('По запросу GET /api/categories/ получаем ответ с корректной структурой')
     def test_get_categories_list(self):
-        response = requests.get(URL.CATEGORIES, params={'limit': 100}, timeout=10)
+        response = requests.get(URL.CATEGORIES, params={'limit': 200}, timeout=10)
         response_structure = check_list_structure(response.json(), check_category, Sample.CATEGORY_STRUCTURE)
         assert (response.status_code == 200 and response_structure == "Correct")
+
+
+
+
+
+
+
+
+
+
+
+
 
     #@allure.title('По запросу GET /api/categories/ категориям 1 уровня соответствует правильный список '
                   #'подкатегорий (проверяем по названиям)')
