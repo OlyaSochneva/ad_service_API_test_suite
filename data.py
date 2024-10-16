@@ -1,31 +1,38 @@
 class TestData:
-    ADMIN_TOKEN = ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyODE1"
-                   "NTc1NiwiaWF0IjoxNzI4MDY5MzU2LCJqdGkiOiJjMGI1M2UzOTk4OTk0MDFkYTBjZjU5NjAwNmMxNzM2NSIs"
-                   "ImlkIjoxfQ.IDznL9U4jn7KT_qbgAh-h14i1q5IoZCTzg3khJfzWis")
+
+    ADMIN_TOKEN = ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyOTA5NjkyMi"
+                   "wiaWF0IjoxNzI5MDEwNTIyLCJqdGkiOiJkNTE5YjY4NTZjNDg0YWEwYWQ2NzNiNjJmMTRhMDYyNCIsImlkIjoxfQ."
+                   "XQZKm9dMLsQ9yp_fP-WuIhDuGMWLmkShEHDVcrZWziw")
+
+    USER_ID = 380
+
+    USER_TOKEN = ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyOTA5NjgxO"
+                  "SwiaWF0IjoxNzI5MDEwNDE5LCJqdGkiOiIyOGM2YzIyMzc4YzI0NzFiODczYWU2NmUzNmYzMTQ3NyIsImlkIjozODB9."
+                  "2OpMwjRlHSqNVGkIkt5VThjBtUETybyDnBEJ6CbAC_E")
+
+    NTF_ID = 137
+
     USER_ADMIN = {"email": "admin@localhost"}
-    CITY = {
-        "id": 2,
-        "name": "Санкт-Петербург",
-        "country": "Россия",
-        "region": "Санкт-Петербург"
-    }
-    CATEGORY_ID = 7  # "Всё для сада"
+
+    CATEGORY_ID = 7  # тестовая категория - "Всё для сада"
+
+    CITY_ID = 2      # тестовый город - Санкт-Петербург
 
 
 class URL:
-    BASE = "https://api.dev.ads.ktsf.ru/"  # бэк 2
+    BASE = "https://api.dev.ads.ktsf.ru/"
     CATEGORIES = BASE + "/api/categories/"  # получить все категории, получить по id
-    CARDS = BASE + "/api/cards/"  # получить все объявления, получить по id
-    SERVICE_CARDS = CARDS + "services/"  # получить все услуги, получить по id
-    VEHICLE_CARDS = CARDS + "vehicles/"  # получить все авто, получить по id
-    USERS = BASE + "/api/users/"  # получить всех юзеров, получить по id
+    CARDS = BASE + "/api/cards/"            # получить все объявления, получить по id
+    SERVICE_CARDS = CARDS + "services/"     # получить все услуги, получить по id
+    VEHICLE_CARDS = CARDS + "vehicles/"     # получить все авто, получить по id
+    USERS = BASE + "/api/users/"            # получить всех юзеров, получить по id
     USER_ME = USERS + "/me/"
     REGISTRATION = BASE + "/api/registration/"
     SEND_CODE = BASE + "/api/send_code/"
     LOGIN = BASE + "/api/login/"
     FAVORITES = BASE + "/api/favorites/"
     NOTIFICATIONS = BASE + "/api/notifications/"
-    CITIES = BASE + "/api/cities/"  # получить все города, получить по id
+    CITIES = BASE + "/api/cities/"         # получить все города, получить по id
 
 
 class Message:
@@ -46,6 +53,8 @@ class Message:
     MUST_BE_BOOLEAN = "Must be a valid boolean."
     TITLE_AND_DSCR_REQUIRED = "Title and description are required"
     REQUIRED_FIELD = "Обязательное поле."
+    CARD_NOT_ARCHIVE = "Card is not archive"
+    CARD_NOT_ACTIVE = "Card is not active"
 
 
 class Data:

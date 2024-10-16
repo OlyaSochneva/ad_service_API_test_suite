@@ -6,17 +6,18 @@ from assistant_methods import generate_random_string
 from data import URL, Message
 from payloads import new_service_card_payload
 from response_samples import Sample
-from check_response import check_item_structure
+from check_response import check_structure
 
 
 class TestCreateServiceCard:
     @allure.title('С корректными данными можно создать новое объявление услуги')
     def test_create_service_card_success(self, new_user_id_and_token):
         token = new_user_id_and_token["token"]
+        #print(token)
         payload = new_service_card_payload()
         response = requests.post(URL.SERVICE_CARDS, headers={'Authorization': f'Bearer {token}'}, json=payload)
-        print(response.json())
-        response_structure = check_item_structure(response.json(), Sample.SERVICE_CARD_STRUCTURE)
+        #print(response.json())
+        response_structure = check_structure(response.json(), Sample.SERVICE_CARD_STRUCTURE)
         assert (response.status_code == 201 and response_structure == "Correct")
 
     @allure.title('Нельзя создать объявление услуги, если не передать токен или передать невалидный')

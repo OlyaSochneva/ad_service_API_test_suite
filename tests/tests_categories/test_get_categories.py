@@ -1,18 +1,17 @@
 import allure
-import pytest
 import requests
 
-from data import URL, Data
+from data import URL
 from response_samples import Sample
-from check_response import check_list_structure
-from check_response import check_category, check_categories_names, check_subcategories_names
+from check_response import check_list_structure, check_structure
 
 
 class TestGetCategories:
     @allure.title('По запросу GET /api/categories/ получаем ответ с корректной структурой')
     def test_get_categories_list(self):
         response = requests.get(URL.CATEGORIES, params={'limit': 200}, timeout=10)
-        response_structure = check_list_structure(response.json(), check_category, Sample.CATEGORY_STRUCTURE)
+        response_structure = check_list_structure(response.json(), check_structure, Sample.CATEGORY_STRUCTURE)
+        #print(response.json())
         assert (response.status_code == 200 and response_structure == "Correct")
 
 
