@@ -1,23 +1,34 @@
 Сервис объявлений автотестирование API
 Запросы, тестируемые автоматически:
-GET /api/categories/          Список категорий
-GET /api/categories/{id}/	  Получение категории
-GET /api/cards/	              Список объявлений
-POST /api/cards/	          Создание объявления
-GET /api/cards/{id}/	      Получение объявления
-GET /api/cards/services/      Список объявлений услуг
-POST /api/cards/services/     Создание объявления услуг
-GET /api/cards/services/{id}/ Получение объявления услуг
-GET /api/users/{id}/          Получение пользователя
-GET /api/users/me/            Профиль пользователя
-GET /api/cities/              Список городов
-GET /api/cities/              Получение города
-GET /api/notifications/       Все уведомления
-POST /api/notifications/      Создание уведомления
-GET /api/notifications/{id}/  Получение уведомления
-PATCH /api/notifications/{id}/Прочитать уведомление
+Список категорий              GET /api/categories/
+Получение категории по id     GET /api/categories/{id}/
+Получить список объявлений    GET /api/cards/
+Создание объявления           POST /api/cards/
+Получение объявления по id    GET /api/cards/{id}/
+Архивировать объявление       POST /api/cards/{id}/archive/
+Восстановить из архива        POST /api/cards/{id}/active/
+Добавить в избранное          POST /api/cards/{id}/favorite/
+Удалить из избранного         DELETE /api/cards/{id}/favorite/
+Получить список объявлений (услуги)  GET /api/cards/services/
+Создание объявления (услуги)         POST /api/cards/services/
+Получение объявления (услуги) по id  GET /api/cards/services/{id}/
+Архивировать (услуги)                POST /api/cards/services/ {id}/archive/
+Восстановить из архива (услуги)      POST /api/cards/services/{id}/active/
+Добавить в избранное (услуги)        POST /api/cards/services/{id}/favorite/
+Удалить из избранного (услуги)       DELETE /api/cards/{id}/favorite/
+Получение пользователя по id  GET /api/users/{id}/
+Профиль пользователя          GET /api/users/me/
+Список городов                GET /api/cities/
+Получение города по id        GET /api/cities/
+Создание диалога
+Получение диалога
+Отправка сообщения
+Получить список уведомлений   GET /api/notifications/
+Создание уведомления          POST /api/notifications/
+Получение уведомления по id   GET /api/notifications/{id}/
+Прочитать уведомление         PATCH /api/notifications/{id}/
 
-Всего 59 тестов, среднее время выполнения: 2 минуты
+
 
 
 
