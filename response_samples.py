@@ -1,10 +1,4 @@
 class Sample:
-    LIST_STRUCTURE = {
-        "count": "",
-        "next": "",
-        "previous": "",
-        "results": []
-    }
     USER_STRUCTURE = {
         "id": "",
         "email": "",
@@ -65,33 +59,6 @@ class Sample:
         "price_type": "",
         "need_correct": "",
         "comment": "",
-        "category": {},
-        "city": {}
-    }
-    VEHICLE_CARD_STRUCTURE = {
-        "id": "",
-        "image": [],
-        "author": {},
-        "is_favorite": "",
-        "favorite_count": "",
-        "promo": "",
-        "title": "",
-        "description": "",
-        "created_at": "",
-        "active_at": "",
-        "views": "",
-        "connect_method": "",
-        "status": "",
-        "price": "",
-        "new_or_used": "",
-        "year": "",
-        "make": "",
-        "body_type": "",
-        "transmission": "",
-        "drivetrain": "",
-        "color": "",
-        "mileage": "",
-        "fuel": "",
         "category": {},
         "city": {}
     }

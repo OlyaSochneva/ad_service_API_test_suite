@@ -1,17 +1,5 @@
 class TestData:
 
-    ADMIN_TOKEN = ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyOTA5NjkyMi"
-                   "wiaWF0IjoxNzI5MDEwNTIyLCJqdGkiOiJkNTE5YjY4NTZjNDg0YWEwYWQ2NzNiNjJmMTRhMDYyNCIsImlkIjoxfQ."
-                   "XQZKm9dMLsQ9yp_fP-WuIhDuGMWLmkShEHDVcrZWziw")
-
-    USER_ID = 380
-
-    USER_TOKEN = ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyOTA5NjgxO"
-                  "SwiaWF0IjoxNzI5MDEwNDE5LCJqdGkiOiIyOGM2YzIyMzc4YzI0NzFiODczYWU2NmUzNmYzMTQ3NyIsImlkIjozODB9."
-                  "2OpMwjRlHSqNVGkIkt5VThjBtUETybyDnBEJ6CbAC_E")
-
-    NTF_ID = 137
-
     USER_ADMIN = {"email": "admin@localhost"}
 
     CATEGORY_ID = 7  # тестовая категория - "Всё для сада"
@@ -20,7 +8,7 @@ class TestData:
 
 
 class URL:
-    BASE = "https://api.dev.ads.ktsf.ru/"
+    BASE = "https://api.dev.ads.ktsf.ru"
     CATEGORIES = BASE + "/api/categories/"  # получить все категории, получить по id
     CARDS = BASE + "/api/cards/"            # получить все объявления, получить по id
     SERVICE_CARDS = CARDS + "services/"     # получить все услуги, получить по id
@@ -30,9 +18,11 @@ class URL:
     REGISTRATION = BASE + "/api/registration/"
     SEND_CODE = BASE + "/api/send_code/"
     LOGIN = BASE + "/api/login/"
-    FAVORITES = BASE + "/api/favorites/"
+    #FAVORITES = BASE + "/api/favorites/"
     NOTIFICATIONS = BASE + "/api/notifications/"
     CITIES = BASE + "/api/cities/"         # получить все города, получить по id
+    DIALOGS = BASE + "/api/dialogs/dialogs/"
+    MESSAGE = BASE + "/api/dialogs/messages/send/"
 
 
 class Message:
@@ -55,6 +45,8 @@ class Message:
     REQUIRED_FIELD = "Обязательное поле."
     CARD_NOT_ARCHIVE = "Card is not archive"
     CARD_NOT_ACTIVE = "Card is not active"
+    ALREADY_FAVORITE = "Объявление уже добавлено!"
+    ALREADY_NOT_FAVORITE = "Объявление уже удалено!"
 
 
 class Data:

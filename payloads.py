@@ -1,6 +1,4 @@
-# from assistant_methods import generate_random_email, generate_random_string, generate_phone_number
-import string
-import random
+from assistant_methods import generate_random_email, generate_random_string, generate_phone_number
 
 
 def new_user_payload():
@@ -15,13 +13,13 @@ def new_user_payload():
 def new_card_payload():
     payload = {
         # "images": "",
-        "title": "Test Card",
         # "description": "",
+        "title": "Test Card",
         "connect_method": "only_calls",
         "price": 1000,
         "new_or_used": "new",
-        "category": 5,  # "Личные вещи"
-        "city": 2       # Санкт-Петербург
+        "category": 5,   # "Личные вещи"
+        "city": 2        # Санкт-Петербург
     }
     return payload
 
@@ -29,13 +27,13 @@ def new_card_payload():
 def new_service_card_payload():
     payload = {
         # "images": "",
-        "title": "Test Service Card",
         # "description": "",
+        "title": "Test Service Card",
         "connect_method": "only_calls",
-        # "price": 1000,
+        "price": 1000,
         "price_type": "per_unit",
         "category": 5,
-        "city": 2
+        "city": 2        # Санкт-Петербург
     }
     return payload
 
@@ -50,33 +48,29 @@ def notification_payload(user_id):
 
 
 def read_notification_payload():
-    payload = {
+    return {
         "is_read": True
     }
-    return payload
 
 
 def unread_notification_payload():
-    payload = {
+    return {
         "is_read": False
+    }
+
+
+def start_dialog_payload(card_id):
+    return {
+        "card": card_id
+    }
+
+
+def send_message(dialog_id, text):
+    payload = {
+        "dialog": dialog_id,
+        "text": text
     }
     return payload
 
 
-def generate_random_string(length):
-    letters = string.ascii_lowercase
-    random_string = ''.join(random.choice(letters) for i in range(length))
-    return random_string
 
-
-def generate_random_email():
-    email = generate_random_string(5)
-    email += '@test.com'
-    return email
-
-
-def generate_phone_number():
-    phone_number = '89'  # чтобы номер был похож на настоящий
-    for i in range(9):
-        phone_number += random.choice(string.digits)
-    return phone_number

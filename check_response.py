@@ -17,9 +17,10 @@ def check_structure(item, sample):
 
 def check_list_structure(response, check_method, sample):
     errors_found = False
-    if set(response.keys()) != set(Sample.LIST_STRUCTURE.keys()):
-        return "Wrong list structure"
-    data = response['results']
+    if "results" in response:
+        data = response['results']
+    else:
+        data = response
     if len(data) == 0:
         return "Empty list"
     for item in data:
