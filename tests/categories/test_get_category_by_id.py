@@ -7,7 +7,8 @@ from response_samples import Sample
 from check_response import check_structure, return_id
 
 
-class TestGetCategoryById:          # GET /api/categories/{id}
+#                                        GET /api/categories/{id}
+class TestGetCategoryById:
     @allure.title('Можно получить нужную категорию по id')
     def test_get_category_by_id_success(self):
         response = requests.get(URL.CATEGORIES + str(Test.CATEGORY_ID), timeout=10)

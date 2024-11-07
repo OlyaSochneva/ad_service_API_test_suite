@@ -8,20 +8,21 @@ from payloads import start_dialog_payload
 
 
 def test_get_card_and_seller_token(basic_card):
-    print(basic_card)
+    print(f'Card id: {basic_card["id"]}')
+    print(f'Seller token: {basic_card["token"]}')
 
 
 def test_get_buyer_token(user_refresh_token):
-    print(user_refresh_token)
+    print(f'Buyer token: {user_refresh_token}')
 
 
-SELLER = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczMDIxMDA0MSwiaWF0IjoxNzMwMTIzNjQxLCJqdGkiOiJlNWFkN2E3YjBjMWU0NDA3OGNlOWJmNjMzNWE2OTU3YiIsImlkIjoxODl9.aUEZ04Hh70DEBNRJISJ5JG8d22h8s-223KOyARSa4Bs"
+SELLER = ""
 
-CARD_ID = "896"
+CARD_ID = ""
 
-BUYER = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczMDIxMDA3MCwiaWF0IjoxNzMwMTIzNjcwLCJqdGkiOiIxNWFhMmZmYTdhMTk0NDA4YmU5YTNhZTA5YTU2ZDViMSIsImlkIjoxOTB9.L1TSK4mBbIPCTDcL1M0UrxRUiw4C1SITm3YYSILxDgw"
+BUYER = ""
 
-DIALOG_ID = 42
+DIALOG_ID = 0
 
 
 #                              !!!CHECK CARD STATUS BEFORE RUN!!!

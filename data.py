@@ -9,18 +9,17 @@ class TestData:
 
 class URL:
     BASE = "https://api.dev.ads.ktsf.ru"
-    CATEGORIES = BASE + "/api/categories/"  # получить все категории, получить по id
-    CARDS = BASE + "/api/cards/"            # получить все объявления, получить по id
-    SERVICE_CARDS = CARDS + "services/"     # получить все услуги, получить по id
-    VEHICLE_CARDS = CARDS + "vehicles/"     # получить все авто, получить по id
-    USERS = BASE + "/api/users/"            # получить всех юзеров, получить по id
+    CATEGORIES = BASE + "/api/categories/"
+    CARDS = BASE + "/api/cards/"
+    SERVICE_CARDS = CARDS + "services/"
+    VEHICLE_CARDS = CARDS + "vehicles/"
+    USERS = BASE + "/api/users/"
     USER_ME = USERS + "/me/"
     REGISTRATION = BASE + "/api/registration/"
     SEND_CODE = BASE + "/api/send_code/"
     LOGIN = BASE + "/api/login/"
-    #FAVORITES = BASE + "/api/favorites/"
     NOTIFICATIONS = BASE + "/api/notifications/"
-    CITIES = BASE + "/api/cities/"         # получить все города, получить по id
+    CITIES = BASE + "/api/cities/"
     DIALOGS = BASE + "/api/dialogs/dialogs/"
     MESSAGE = BASE + "/api/dialogs/messages/send/"
 

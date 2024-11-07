@@ -9,6 +9,7 @@ from response_samples import Sample
 from check_response import check_structure
 
 
+#                                       POST /api/cards/
 class TestCreateCard:
     @allure.title('С корректными данными можно создать новое объявление')
     def test_create_card_success(self, user_token):

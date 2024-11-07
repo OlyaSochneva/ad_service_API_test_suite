@@ -6,7 +6,8 @@ from response_samples import Sample
 from check_response import check_list_structure, check_structure
 
 
-class TestGetCities:                # GET /api/cities/
+#                                         GET /api/cities/
+class TestGetCities:
     @allure.title('Получаем список городов с корректной структурой')
     def test_get_cities_list(self):
         response = requests.get(URL.CITIES, params={'limit': 10}, timeout=10)

@@ -7,7 +7,8 @@ from response_samples import Sample
 from check_response import check_structure, return_id
 
 
-class TestGetUser:                  # GET /api/users/{id}
+#                                            GET /api/users/{id}
+class TestGetUser:
     @allure.title('Можно получить нужного пользователя по id')
     def test_get_user_by_id_success(self, user_id):
         response = requests.get(URL.USERS + str(user_id), timeout=10)

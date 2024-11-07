@@ -8,7 +8,8 @@ from check_response import check_structure, return_id
 from response_samples import Sample
 
 
-class TestGetNotificationById:               # GET /api/notifications/{id}
+#                                          GET /api/notifications/{id}
+class TestGetNotificationById:
     @allure.title('Можно получить нужное уведомление по id')
     def test_get_notification_by_id_success(self, notification):
         response = requests.get(URL.NOTIFICATIONS + str(notification["id"]),

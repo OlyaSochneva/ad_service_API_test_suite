@@ -8,7 +8,8 @@ from response_samples import Sample
 from check_response import check_list_structure, check_structure
 
 
-class TestGetNotifications:            # GET /api/notifications/
+#                                        GET /api/notifications/
+class TestGetNotifications:
     @allure.title('Можно получить cписок уведомлений пользователя по токену')
     def test_get_notifications_list_success(self, notification):
         response = requests.get(URL.NOTIFICATIONS,

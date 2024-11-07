@@ -7,7 +7,8 @@ from response_samples import Sample
 from check_response import check_structure, return_id
 
 
-class TestGetCityById:                # GET /api/cities/{id}
+#                                           GET /api/cities/{id}
+class TestGetCityById:
     @allure.title('Можно получить нужный город по id')
     def test_get_city_by_id_success(self):
         response = requests.get(URL.CITIES + str(Test.CITY_ID), timeout=10)

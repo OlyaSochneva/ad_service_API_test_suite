@@ -8,7 +8,8 @@ from check_response import check_structure
 from assistant_methods import generate_random_string
 
 
-class TestGetUserByToken:              # GET /api/users/me/
+#                                             GET /api/users/me/
+class TestGetUserByToken:
     @allure.title('Можно получить пользователя по токену')
     def test_get_authorized_user_by_token_success(self, user_token):
         response = requests.get(URL.USER_ME, headers={'Authorization': f'Bearer {user_token}'})

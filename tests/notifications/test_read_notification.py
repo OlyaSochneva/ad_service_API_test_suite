@@ -7,6 +7,7 @@ from data import URL, Message
 from payloads import read_notification_payload, unread_notification_payload
 
 
+#                                       PATCH /api/notifications/{id}/
 class TestReadNotification:
     @allure.title('Можно поменять статус уведомления на прочитанное')
     @pytest.mark.order(1)

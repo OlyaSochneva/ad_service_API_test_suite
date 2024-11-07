@@ -6,7 +6,7 @@ from response_samples import Sample
 from check_response import check_list_structure
 from check_response import check_card
 
-
+#                             GET /api/cards/, GET /api/cards/services/
 class TestGetCards:
     @allure.title('Получаем список карточек с корректной структурой')
     def test_get_cards_list(self):

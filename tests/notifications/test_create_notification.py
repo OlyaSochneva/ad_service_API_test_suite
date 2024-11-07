@@ -9,7 +9,8 @@ from response_samples import Sample
 from check_response import check_structure
 
 
-class TestCreateNotification:          # POST /api/notifications/
+#                                     POST /api/notifications/
+class TestCreateNotification:
     @allure.title('С корректными данными можно создать новое уведомление')
     def test_create_notification_for_one_user_success(self, admin_token, user_id, user_token):
         payload = notification_payload(user_id)

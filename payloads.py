@@ -32,7 +32,7 @@ def new_service_card_payload():
         "connect_method": "only_calls",
         "price": 1000,
         "price_type": "per_unit",
-        "category": 5,
+        "category": 81,  # «Обучение и курсы - иностранные языки»
         "city": 2        # Санкт-Петербург
     }
     return payload
