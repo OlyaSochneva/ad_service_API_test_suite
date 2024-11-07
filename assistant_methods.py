@@ -39,26 +39,5 @@ def generate_phone_number():
         phone_number += random.choice(string.digits)
     return phone_number
 
-# def return_category(response, category_name):
-# categories = response['results']
-# for category in categories:
-# if category['name'] == category_name:
-# return category
 
 
-# def return_card_category(card):
-# category = card['category']
-# return category['name']
-
-
-# def compare_names(data, sample):
-# names = []
-# for item in data:
-# names.append(item['name'])
-# extra_categories = [string for string in names if string not in sample]
-# missing_categories = [string for string in sample if string not in names]
-# if len(missing_categories) == 0 and len(extra_categories) == 0:
-# return "Correct"
-# else:
-# return ("Missing categories: " + ", ".join(missing_categories),
-# "Extra categories: " + ", ".join(extra_categories))
