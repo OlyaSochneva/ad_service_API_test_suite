@@ -30,14 +30,14 @@ class TestSendMessage:
     def test_send_message_to_someone_else_dialog_causes_error(self):
         response = requests.post(URL.MESSAGE, headers={"Authorization": f"Bearer {BUYER}"},
                                  json=send_message(DIALOG_ID - 1, "Alarm"))
-        print(response.json())
+        #print(response.json())
         assert response.status_code == 403
 
     @allure.title('(400)Нельзя отправить пустое сообщение в диалог')
     def test_send_empty_message_to_dialog_causes_error(self):
         response = requests.post(URL.MESSAGE, headers={"Authorization": f"Bearer {BUYER}"},
                                  json=send_message(DIALOG_ID, None))
-        print(response.json())
+        #print(response.json())
         assert response.status_code == 400
 
     @allure.title('(401)Нельзя отправить сообщение в диалог с отсут./невалидным токеном')

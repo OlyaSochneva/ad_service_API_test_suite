@@ -22,7 +22,7 @@ def user_token():
     return access_token
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def user_refresh_token():
     payload = new_user_payload()
     requests.post(URL.REGISTRATION, data=payload)
@@ -37,26 +37,42 @@ def user_id(user_token):
     return user_id
 
 
-@pytest.fixture(scope="session")
-def basic_card(user_refresh_token):
+@pytest.fixture(scope="function")
+def active_card(user_refresh_token, admin_token):
     payload = new_card_payload()
     card_id = requests.post(URL.CARDS, headers={'Authorization': f'Bearer {user_refresh_token}'},
                             json=payload).json()["id"]
-    return {
-        "id": card_id,
-        "token": user_refresh_token
-    }
+    requests.post(URL.CARDS + str(card_id) + "/change_status/", headers={'Authorization': f'Bearer {admin_token}'})
+    yield {"id": str(card_id),
+           "token": user_refresh_token}
+    requests.delete(URL.CARDS + str(card_id) + "/", headers={'Authorization': f'Bearer {user_refresh_token}'})
 
 
-@pytest.fixture(scope="session")
-def service_card(user_token):
+@pytest.fixture(scope="function")
+def archive_card(active_card):
+    requests.post(URL.CARDS + active_card["id"] + "/archive/",
+                  headers={'Authorization': f'Bearer {active_card["token"]}'})
+    return active_card
+
+
+
+
+@pytest.fixture(scope="function")
+def service_card(user_token, admin_token):
     payload = new_service_card_payload()
     card_id = requests.post(URL.SERVICE_CARDS, headers={'Authorization': f'Bearer {user_token}'},
                             json=payload).json()["id"]
-    return {
-        "id": card_id,
-        "token": user_token
-    }
+    requests.post(URL.CARDS + str(card_id) + "/change_status/", headers={'Authorization': f'Bearer {admin_token}'})
+    yield {"id": str(card_id),
+           "token": user_token}
+    requests.delete(URL.CARDS + str(card_id) + "/", headers={'Authorization': f'Bearer {user_token}'})
+
+
+@pytest.fixture(scope="function")
+def archive_service(service_card):
+    requests.post(URL.CARDS + service_card["id"] + "/archive/",
+                  headers={'Authorization': f'Bearer {service_card["token"]}'})
+    return service_card
 
 
 @pytest.fixture(scope="session")
@@ -72,9 +88,3 @@ def notification(admin_token, user_token):
         "id": user_ntf_id,
         "token": user_token
     }
-
-
-
-
-
-

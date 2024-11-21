@@ -30,7 +30,7 @@ def check_list_structure(response, check_method, sample):
 
 
 def return_id(response_dict):
-    return response_dict['id']
+    return str(response_dict['id'])
 
 
 def check_card(card, type_of_card_sample):

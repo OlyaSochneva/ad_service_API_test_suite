@@ -2,21 +2,33 @@ import pytest
 import allure
 import requests
 
-from data import URL, Message, TestData as Test
+from data import URL, Message, CATEGORY
 from response_samples import Sample
 from check_response import check_structure, return_id
 
 
 #                                        GET /api/categories/{id}
 class TestGetCategoryById:
-    @allure.title('Можно получить нужную категорию по id')
-    def test_get_category_by_id_success(self):
-        response = requests.get(URL.CATEGORIES + str(Test.CATEGORY_ID), timeout=10)
+    @allure.title('По запросу GET /api/categories/{id} получаем категорию c нужным id')
+    @pytest.mark.parametrize('category_id', [
+        CATEGORY.MAIN["Транспорт"],
+        CATEGORY.MAIN["Услуги"],
+        CATEGORY.MAIN["Недвижимость"],
+        CATEGORY.MAIN["Строительство"],
+        CATEGORY.MAIN["Личные вещи"],
+        CATEGORY.MAIN["Товары для дома"],
+        CATEGORY.MAIN["Всё для сада"],
+        CATEGORY.MAIN["Электроника и бытовая техника"],
+        CATEGORY.MAIN["Животные"],
+        CATEGORY.MAIN["Оборудование и запчасти"]
+    ])
+    def test_get_category_by_id(self, category_id):
+        response = requests.get(URL.CATEGORIES + str(category_id), timeout=10)
         response_structure = check_structure(response.json(), Sample.CATEGORY_STRUCTURE)
         response_id = return_id(response.json())
         assert (response.status_code == 200 and
                 response_structure == "Correct" and
-                response_id == Test.CATEGORY_ID)
+                response_id == category_id)
 
     @allure.title('(404)Нельзя получить категорию с несуществующим/невалидным id')
     @pytest.mark.parametrize('wrong_id, error_message', [
@@ -25,5 +37,3 @@ class TestGetCategoryById:
     def test_get_category_by_wrong_id_causes_404_error(self, wrong_id, error_message):
         response = requests.get(URL.CATEGORIES + wrong_id, timeout=10)
         assert (response.status_code == 404 and error_message in str(response.json()))
-
-

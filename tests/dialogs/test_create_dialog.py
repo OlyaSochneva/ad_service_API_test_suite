@@ -16,13 +16,13 @@ def test_get_buyer_token(user_refresh_token):
     print(f'Buyer token: {user_refresh_token}')
 
 
-SELLER = ""
+SELLER = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczMjIxODUyOCwiaWF0IjoxNzMyMTMyMTI4LCJqdGkiOiI2MzU4ODU5NDMyYjA0MDljYmJhM2Q0NWZlYjU3N2Q2MCIsImlkIjo1NH0.fueCfW3VAouMguWNZfKGLX9csxpiASebYfzgO5GibXY"
 
-CARD_ID = ""
+CARD_ID = "426"
 
-BUYER = ""
+BUYER = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczMjIxODU2MiwiaWF0IjoxNzMyMTMyMTYyLCJqdGkiOiI4YjU5YmZhZTUzZjc0N2Y4ODA2ZDA3N2RiNDRlNTA4ZiIsImlkIjo1NX0.PQMW1sllmt6eOj4vS-OhPTfvYBNHdD5IMd3f54cTz7o"
 
-DIALOG_ID = 0
+DIALOG_ID = 9
 
 
 #                              !!!CHECK CARD STATUS BEFORE RUN!!!
@@ -37,7 +37,7 @@ class TestCreateDialog:
         print(response.json())
         assert response.status_code == 201
 
-    @allure.title('(401)Нельзя создать диалог по своему объявлению (с самим собой)')
+    @allure.title('(400)Нельзя создать диалог по своему объявлению (с самим собой)')
     def test_create_dialog_with_yourself_causes_error(self):
         response = requests.post(URL.DIALOGS + "/create/", headers={"Authorization": f"Bearer {SELLER}"},
                                  json=start_dialog_payload(CARD_ID))

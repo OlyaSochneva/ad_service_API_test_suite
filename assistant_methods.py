@@ -10,7 +10,7 @@ def return_user_ntf_id(response, notification_id):
 
 
 def return_card_status(card):
-    return card['status']
+    return card['archive']
 
 
 def return_is_favorite(card):
