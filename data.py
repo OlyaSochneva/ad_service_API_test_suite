@@ -1,7 +1,9 @@
+ADMIN_TOKEN = ""
+
 class TestData:
     USER_ADMIN = {"email": "admin@localhost"}
 
-    CITY_ID = 2  # тестовый город - Санкт-Петербург
+    CITY_ID = "2"  # тестовый город - Санкт-Петербург
 
 
 class URL:
@@ -19,6 +21,7 @@ class URL:
     CITIES = BASE + "/api/cities/"
     DIALOGS = BASE + "/api/dialogs/dialogs/"
     MESSAGE = BASE + "/api/dialogs/messages/send/"
+    FAVORITES = BASE + "/api/favorites/"
 
 
 class Message:
@@ -42,20 +45,20 @@ class Message:
     CARD_NOT_ARCHIVE = "Card is not archive"
     CARD_NOT_ACTIVE = "Card is not active"
     ALREADY_FAVORITE = "Объявление уже добавлено!"
-    ALREADY_NOT_FAVORITE = "Объявление уже удалено!"
+    ALREADY_NOT_FAVORITE = "Advertisement has already been removed!"
 
 
 class CATEGORY:
     MAIN = {
-        "Транспорт": 1,
-        "Услуги": 2,
-        "Недвижимость": 3,
-        "Строительство": 4,
-        "Личные вещи": 5,
-        "Товары для дома": 6,
-        "Всё для сада": 7,
-        "Электроника и бытовая техника": 8,
-        "Животные": 9,
-        "Оборудование и запчасти": 10
+        "Транспорт": "1",
+        "Услуги": "2",
+        "Недвижимость": "3",
+        "Строительство": "4",
+        "Личные вещи": "5",
+        "Товары для дома": "6",
+        "Всё для сада": "7",
+        "Электроника и бытовая техника": "8",
+        "Животные": "9",
+        "Оборудование и запчасти": "10"
     }
 

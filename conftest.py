@@ -34,18 +34,23 @@ def user_refresh_token():
 @pytest.fixture(scope="session")
 def user_id(user_token):
     user_id = requests.get(URL.USER_ME, headers={'Authorization': f'Bearer {user_token}'}).json()["id"]
-    return user_id
+    return str(user_id)
 
 
 @pytest.fixture(scope="function")
-def active_card(user_refresh_token, admin_token):
+def new_card(user_refresh_token):
     payload = new_card_payload()
     card_id = requests.post(URL.CARDS, headers={'Authorization': f'Bearer {user_refresh_token}'},
                             json=payload).json()["id"]
-    requests.post(URL.CARDS + str(card_id) + "/change_status/", headers={'Authorization': f'Bearer {admin_token}'})
     yield {"id": str(card_id),
            "token": user_refresh_token}
     requests.delete(URL.CARDS + str(card_id) + "/", headers={'Authorization': f'Bearer {user_refresh_token}'})
+
+
+@pytest.fixture(scope="function")
+def active_card(new_card, admin_token):
+    requests.post(URL.CARDS + new_card["id"] + "/change_status/", headers={'Authorization': f'Bearer {admin_token}'})
+    return new_card
 
 
 @pytest.fixture(scope="function")
@@ -55,24 +60,53 @@ def archive_card(active_card):
     return active_card
 
 
-
-
 @pytest.fixture(scope="function")
-def service_card(user_token, admin_token):
+def new_service(user_refresh_token):
     payload = new_service_card_payload()
-    card_id = requests.post(URL.SERVICE_CARDS, headers={'Authorization': f'Bearer {user_token}'},
+    card_id = requests.post(URL.SERVICE_CARDS, headers={'Authorization': f'Bearer {user_refresh_token}'},
                             json=payload).json()["id"]
-    requests.post(URL.CARDS + str(card_id) + "/change_status/", headers={'Authorization': f'Bearer {admin_token}'})
     yield {"id": str(card_id),
-           "token": user_token}
-    requests.delete(URL.CARDS + str(card_id) + "/", headers={'Authorization': f'Bearer {user_token}'})
+           "token": user_refresh_token}
+    requests.delete(URL.CARDS + str(card_id) + "/", headers={'Authorization': f'Bearer {user_refresh_token}'})
 
 
 @pytest.fixture(scope="function")
-def archive_service(service_card):
-    requests.post(URL.CARDS + service_card["id"] + "/archive/",
-                  headers={'Authorization': f'Bearer {service_card["token"]}'})
-    return service_card
+def active_service(new_service, admin_token):
+    requests.post(URL.CARDS + new_service["id"] + "/change_status/",
+                  headers={'Authorization': f'Bearer {admin_token}'})
+    return new_service
+
+
+@pytest.fixture(scope="function")
+def archive_service(active_service):
+    requests.post(URL.SERVICE_CARDS + active_service["id"] + "/archive/",
+                  headers={'Authorization': f'Bearer {active_service["token"]}'})
+    return active_service
+
+
+@pytest.fixture(scope="function")
+def create_dialog(active_card, user_token):
+    return {
+        "seller": active_card["token"],
+        "id": int(active_card["id"]),
+        "buyer": user_token,
+    }
+
+
+@pytest.fixture(scope="function")
+def new_dialog(create_dialog):
+    dialog_id = requests.post(URL.DIALOGS + "/create/",
+                              headers={"Authorization": f"Bearer {create_dialog["buyer"]}"},
+                              json={"card": create_dialog["id"]}).json()["id"]
+    create_dialog["dialog_id"] = dialog_id
+    return create_dialog
+
+
+@pytest.fixture(scope="function")
+def dialog(new_dialog):
+    requests.post(URL.MESSAGE, headers={"Authorization": f"Bearer {new_dialog["buyer"]}"},
+                  json={"text": "pu-pu-pu"})
+    return new_dialog
 
 
 @pytest.fixture(scope="session")

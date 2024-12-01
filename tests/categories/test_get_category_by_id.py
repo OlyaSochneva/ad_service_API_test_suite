@@ -23,7 +23,7 @@ class TestGetCategoryById:
         CATEGORY.MAIN["Оборудование и запчасти"]
     ])
     def test_get_category_by_id(self, category_id):
-        response = requests.get(URL.CATEGORIES + str(category_id), timeout=10)
+        response = requests.get(URL.CATEGORIES + category_id + "/", timeout=10)
         response_structure = check_structure(response.json(), Sample.CATEGORY_STRUCTURE)
         response_id = return_id(response.json())
         assert (response.status_code == 200 and

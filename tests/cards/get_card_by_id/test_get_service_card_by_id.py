@@ -9,13 +9,13 @@ from check_response import check_structure, return_id
 
 class TestGetServiceCardById:
     @allure.title('Можно получить нужную карточку услуг по id')
-    def test_get_service_card_by_id_success(self, service_card):
-        response = requests.get(URL.SERVICE_CARDS + service_card["id"] + "/")
+    def test_get_service_card_by_id_success(self, active_service):
+        response = requests.get(URL.SERVICE_CARDS + active_service["id"] + "/")
         response_structure = check_structure(response.json(), Sample.SERVICE_CARD_STRUCTURE)
         response_id = return_id(response.json())
         assert (response.status_code == 200 and
                 response_structure == "Correct" and
-                response_id == service_card["id"])
+                response_id == active_service["id"])
 
     @allure.title('(404/400)Нельзя получить карточку услуг с несуществующим/невалидным id')
     @pytest.mark.parametrize('wrong_id, status_code, error_message', [

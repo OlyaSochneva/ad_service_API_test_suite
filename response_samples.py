@@ -75,6 +75,14 @@ class Sample:
         "country": "",
         "region": ""
     }
+    DIALOG_STRUCTURE = {
+        "id": "",
+        "user1": "",
+        "user2": "",
+        "card": "",
+        "created_at": "",
+        "last_message": ""
+    }
     NOTIFICATION_CREATED_STRUCTURE = {
         "id": "",
         "title": "",

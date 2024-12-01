@@ -10,7 +10,7 @@ def return_user_ntf_id(response, notification_id):
 
 
 def return_card_status(card):
-    return card['archive']
+    return card['status']
 
 
 def return_is_favorite(card):
@@ -38,6 +38,3 @@ def generate_phone_number():
     for i in range(9):
         phone_number += random.choice(string.digits)
     return phone_number
-
-
-

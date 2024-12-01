@@ -1,4 +1,6 @@
 from response_samples import Sample
+import requests
+from data import URL
 
 
 def check_structure(item, sample):
@@ -43,4 +45,7 @@ def check_card(card, type_of_card_sample):
         errors_found = True
     return "Wrong response structure" if errors_found else "Correct"
 
+
+def check_favorites(token):
+    response = requests.get(URL.FAVORITES, headers={'Authorization': f'Bearer {token}'})
 
