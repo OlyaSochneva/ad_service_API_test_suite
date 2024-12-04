@@ -21,9 +21,9 @@ class TestArchiveServiceCard:
         assert (response.status_code == 404 and Message.CARD_NOT_ACTIVE in str(response.json()))
 
     @allure.title('Пользователь не может перевести в архив карточку услуг на модерации')
-    def test_archive_service_card_on_moderation_causes_error(self, service_card):
-        response = requests.post(URL.SERVICE_CARDS + service_card["id"] + "/archive/",
-                                 headers={'Authorization': f'Bearer {service_card["token"]}'})
+    def test_archive_service_card_on_moderation_causes_error(self, new_service):
+        response = requests.post(URL.SERVICE_CARDS + new_service["id"] + "/archive/",
+                                 headers={'Authorization': f'Bearer {new_service["token"]}'})
         assert (response.status_code == 404 and Message.CARD_NOT_ACTIVE in str(response.json()))
 
     @allure.title('Пользователь не может перевести чужую активную карточку услуг в архив')
@@ -42,7 +42,7 @@ class TestArchiveServiceCard:
 
     @allure.title('(404/400)Пользователь не может архивировать карточку услуг с несуществующим/невалидным id')
     @pytest.mark.parametrize('wrong_id, status_code, error_message', [
-        ("6666666666", 404, Message.NON_EXISTENT_CARD),
+        ("6666666666", 404, Message.NON_EXISTENT_SERVICE_CARD),
         ("pu-pu-pu", 400, Message.INVALID_ID)])
     def test_archive_service_card_with_incorrect_id_causes_error(self, wrong_id, status_code,
                                                                  error_message, active_service):

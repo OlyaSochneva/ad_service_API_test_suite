@@ -12,7 +12,7 @@ class TestSendMessage:
     def test_send_first_message_by_buyer_success(self, new_dialog):
         response = requests.post(URL.MESSAGE, headers={"Authorization": f"Bearer {new_dialog["buyer"]}"},
                                  json={"text": "pu-pu-pu"})
-        print(response.json())
+        #print(response.json())
         assert response.status_code == 201
 
     @allure.title('Продавец может отправить сообщение в диалог')

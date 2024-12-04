@@ -45,7 +45,7 @@ class TestAddToFavoritesServices:
 
     @allure.title('(404/400)Нельзя добавить в избранное карточку услуг с несуществующим/невалидным id')
     @pytest.mark.parametrize('wrong_id, status_code, error_message', [
-        ("6666666666", 404, Message.NON_EXISTENT_CARD),
+        ("6666666666", 404, Message.NON_EXISTENT_SERVICE_CARD),
         ("pu-pu-pu", 400, Message.INVALID_ID)])
     def test_add_service_card_to_favorites_by_incorrect_id_causes_error(self, user_token, wrong_id,
                                                                         status_code, error_message):
@@ -100,7 +100,7 @@ class TestRemoveFromFavoritesServices:
 
     @allure.title('(404/400)Нельзя удалить из избранного карточку услуги с несуществующим/невалидным id')
     @pytest.mark.parametrize('wrong_id, status_code, error_message', [
-        ("6666666666", 404, Message.NON_EXISTENT_CARD),
+        ("6666666666", 404, Message.NON_EXISTENT_SERVICE_CARD),
         ("pu-pu-pu", 400, Message.INVALID_ID)])
     def test_remove_service_card_from_favorites_by_incorrect_id_causes_error(self, user_token, wrong_id,
                                                                              status_code, error_message):
