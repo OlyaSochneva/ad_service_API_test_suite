@@ -2,12 +2,12 @@ import pytest
 import allure
 import requests
 
-from data import URL, Message, CATEGORY
+from data import Message, CATEGORY
+from admin_data import URL
 from response_samples import Sample
 from check_response import check_structure, return_id
 
 
-#                                        GET /api/categories/{id}
 class TestGetCategoryById:
     @allure.title('По запросу GET /api/categories/{id} получаем категорию c нужным id')
     @pytest.mark.parametrize('category_id', [

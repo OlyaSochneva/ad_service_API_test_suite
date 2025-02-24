@@ -4,12 +4,12 @@ import requests
 
 from assistant_methods import generate_random_string
 from payloads import notification_payload
-from data import URL, Message
+from data import Message
+from admin_data import URL
 from response_samples import Sample
 from check_response import check_structure
 
 
-#                                     POST /api/notifications/
 class TestCreateNotification:
     @allure.title('С корректными данными можно создать новое уведомление')
     def test_create_notification_for_one_user_success(self, admin_token, user_id, user_token):

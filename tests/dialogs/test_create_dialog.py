@@ -3,7 +3,8 @@ import pytest
 import requests
 
 from assistant_methods import generate_random_string
-from data import URL, Message
+from data import Message
+from admin_data import URL
 
 
 class TestCreateDialog:
@@ -12,7 +13,6 @@ class TestCreateDialog:
         response = requests.post(URL.DIALOGS + "/create/",
                                  headers={"Authorization": f"Bearer {create_dialog["buyer"]}"},
                                  json={"card": create_dialog["id"]})
-        print(response.json())
         assert response.status_code == 201
 
     @allure.title('Нельзя создать диалог к архивному объявлению')

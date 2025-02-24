@@ -3,7 +3,8 @@ import pytest
 import requests
 
 from assistant_methods import return_card_status, generate_random_string
-from data import URL, Message
+from data import Message
+from admin_data import URL
 
 
 class TestActivateCard:

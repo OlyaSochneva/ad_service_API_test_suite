@@ -2,12 +2,12 @@ import allure
 import pytest
 import requests
 
-from data import URL, Message
+from data import Message
+from admin_data import URL
 from response_samples import Sample
 from check_response import check_structure, return_id
 
 
-#                                            GET /api/users/{id}
 class TestGetUser:
     @allure.title('Можно получить нужного пользователя по id')
     def test_get_user_by_id_success(self, user_id):

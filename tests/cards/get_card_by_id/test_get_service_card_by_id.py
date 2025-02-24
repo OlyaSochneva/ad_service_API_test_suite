@@ -2,7 +2,8 @@ import allure
 import pytest
 import requests
 
-from data import URL, Message
+from data import Message
+from admin_data import URL
 from response_samples import Sample
 from check_response import check_structure, return_id
 

@@ -3,11 +3,11 @@ import pytest
 import requests
 
 from assistant_methods import generate_random_string, return_is_read
-from data import URL, Message
+from data import Message
+from admin_data import URL
 from payloads import read_notification_payload, unread_notification_payload
 
 
-#                                       PATCH /api/notifications/{id}/
 class TestReadNotification:
     @allure.title('Можно поменять статус уведомления на прочитанное')
     @pytest.mark.order(1)

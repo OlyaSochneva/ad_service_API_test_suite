@@ -3,13 +3,13 @@ import pytest
 import requests
 
 from assistant_methods import generate_random_string
-from data import URL, Message
+from data import Message
+from admin_data import URL
 from payloads import new_service_card_payload
 from response_samples import Sample
 from check_response import check_structure
 
 
-#                                        POST /api/cards/services/
 class TestCreateServiceCard:
     @allure.title('С корректными данными можно создать новое объявление услуги')
     def test_create_service_card_success(self, user_token):
@@ -34,7 +34,6 @@ class TestCreateServiceCard:
         payload = new_service_card_payload()
         payload.pop(deleted_field)
         response = requests.post(URL.SERVICE_CARDS, headers={'Authorization': f'Bearer {user_token}'}, json=payload)
-        # print(response.json())
         assert response.status_code == 400
 
 

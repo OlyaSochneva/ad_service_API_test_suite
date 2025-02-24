@@ -3,7 +3,8 @@ import pytest
 import requests
 
 from assistant_methods import return_is_favorite, generate_random_string
-from data import URL, Message
+from data import Message
+from admin_data import URL
 
 
 class TestAddToFavorites:
@@ -12,8 +13,6 @@ class TestAddToFavorites:
         response = requests.post(URL.CARDS + active_card["id"] + "/favorite/",
                                  headers={"Authorization": f"Bearer {user_token}"})
         is_favorite = return_is_favorite(response.json())
-        # favorites = requests.get(URL.FAVORITES, headers={"Authorization": f"Bearer {user_token}"})
-        # print(favorites.json())
         assert (response.status_code == 200 and is_favorite is True)
 
     @allure.title('(400)Нельзя добавить карточку в избранное, если она уже там')

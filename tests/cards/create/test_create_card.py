@@ -3,19 +3,18 @@ import pytest
 import requests
 
 from assistant_methods import generate_random_string
-from data import URL, Message
+from data import Message
+from admin_data import URL
 from payloads import new_card_payload
 from response_samples import Sample
 from check_response import check_structure
 
 
-#                                       POST /api/cards/
 class TestCreateCard:
     @allure.title('С корректными данными можно создать новое объявление')
     def test_create_card_success(self, user_token):
         payload = new_card_payload()
         response = requests.post(URL.CARDS, headers={'Authorization': f'Bearer {user_token}'}, json=payload)
-        #print(response.json())
         response_structure = check_structure(response.json(), Sample.CARD_STRUCTURE)
         assert (response.status_code == 201 and response_structure == "Correct")
 

@@ -3,12 +3,12 @@ import pytest
 import requests
 
 from assistant_methods import generate_random_string
-from data import URL, Message
+from data import Message
+from admin_data import URL
 from response_samples import Sample
 from check_response import check_list_structure, check_structure
 
 
-#                                        GET /api/notifications/
 class TestGetNotifications:
     @allure.title('Можно получить cписок уведомлений пользователя по токену')
     def test_get_notifications_list_success(self, notification):

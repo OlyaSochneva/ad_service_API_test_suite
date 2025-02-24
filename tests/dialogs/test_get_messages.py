@@ -1,9 +1,7 @@
 import allure
-import pytest
 import requests
 
-from assistant_methods import generate_random_string
-from data import URL, Message
+from admin_data import URL
 
 
 class TestGetMessages:

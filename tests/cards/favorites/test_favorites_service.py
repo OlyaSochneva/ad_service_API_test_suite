@@ -3,7 +3,8 @@ import pytest
 import requests
 
 from assistant_methods import return_is_favorite, generate_random_string
-from data import URL, Message
+from data import Message
+from admin_data import URL
 
 
 class TestAddToFavoritesServices:

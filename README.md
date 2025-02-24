@@ -1,75 +1,20 @@
-### Ad Service API tests
+### Ad Service API Test Suite
+The test suite covers 27 REST API requests. It reproduces approximately 80% of manual test cases, covering both positive and negative scenarios, ensuring high overall test coverage. 
+ Project includes user and card creation/deletion, adding/removing cards from favorites, archiving/restoring, dialogs functionality, notifications (creation and reading), and retrieving lists of users, cities, and categories.
+All tests are independent; each test generates its own test data, which is deleted after execution.
+#### Navigation:
 
-Документация: https://disk.yandex.ru/edit/disk/disk%2F%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%81%20%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9%2FAPI%202%20%D0%B0%D0%B2%D1%82%D0%BE%D1%82%D0%B5%D1%81%D1%82%D1%8B.xlsx?sk=y6a9ec7c51243ee954f2bdd65db8168b4
+**assistant_methods.py** - generators, etc.
 
-**tests** - папка с тестами
+**check_response.py** - response parsing
 
-**assistant_methods.py** - вспомогательные методы (генераторы и тд)
+**conftest.py** - fixtures
 
-**check_response.py** - парсинг ответов
+**data.py** - external data
 
-**conftest.py** - фикстуры 
+**payloads.py** - methods for creating request bodies
 
-**data.py** - внешние данные
+**response_samples.py** - samples for parsing
 
-**payloads.py** - методы, возвр. тело запроса
 
-**requirements.txt** - внешние зависимости
-
-**response_samples.py** - образцы ответов
-
-#### Тестируемые запросы:
-Список категорий: GET /api/categories/ 
-
-Получение категории по id: GET /api/categories/{id}/ 
-
-Получить список объявлений: GET /api/cards/ 
-
-Создание объявления: POST /api/cards/ 
-
-Получение объявления: по id GET /api/cards/{id}/ 
-
-Архивировать объявление: POST /api/cards/{id}/archive/ 
-
-Восстановить из архива: POST /api/cards/{id}/active/ 
-
-Добавить в избранное: POST /api/cards/{id}/favorite/ 
-
-Удалить из избранного: DELETE /api/cards/{id}/favorite/ 
-
-Получить список объявлений (услуги): GET /api/cards/services/ 
-
-Создание объявления (услуги): POST /api/cards/services/ 
-
-Получение объявления (услуги) по id: GET /api/cards/services/{id}/ 
-
-Архивировать (услуги): POST /api/cards/services/ {id}/archive/ 
-
-Восстановить из архива (услуги): POST /api/cards/services/{id}/active/ 
-
-Добавить в избранное (услуги): POST /api/cards/services/{id}/favorite/ 
-
-Удалить из избранного (услуги): DELETE /api/cards/{id}/favorite/ 
-
-Получение пользователя по id: GET /api/users/{id}/ 
-
-Профиль пользователя: GET /api/users/me/ 
-
-Список городов: GET /api/cities/ 
-
-Получение города по id: GET /api/cities/ 
-
-Создание диалога: POST /api/dialogs/dialogs/create/ 
-
-Получение диалога: GET /api/dialogs/dialogs/{id}/
-
-Отправка сообщения: POST /api/dialogs/messages/send/
-
-Получить список уведомлений: GET /api/notifications/ 
-
-Создание уведомления: POST /api/notifications/ 
-
-Получение уведомления по id: GET /api/notifications/{id}/ 
-
-Прочитать уведомление: PATCH /api/notifications/{id}/
 

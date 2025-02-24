@@ -1,26 +1,4 @@
-ADMIN_TOKEN = ""
-
-class TestData:
-    USER_ADMIN = {"email": "admin@localhost"}
-
-    CITY_ID = "2"  # тестовый город - Санкт-Петербург
-
-
-class URL:
-    BASE = "https://api.prod.ads.ktsf.ru"
-    CATEGORIES = BASE + "/api/categories/"
-    CARDS = BASE + "/api/cards/"
-    SERVICE_CARDS = CARDS + "services/"
-    USERS = BASE + "/api/users/"
-    USER_ME = USERS + "/me/"
-    REGISTRATION = BASE + "/api/registration/"
-    SEND_CODE = BASE + "/api/send_code/"
-    LOGIN = BASE + "/api/login/"
-    NOTIFICATIONS = BASE + "/api/notifications/"
-    CITIES = BASE + "/api/cities/"
-    DIALOGS = BASE + "/api/dialogs/dialogs/"
-    MESSAGE = BASE + "/api/dialogs/messages/send/"
-    FAVORITES = BASE + "/api/favorites/"
+TEST_CITY_ID = "2"  # тестовый город - Санкт-Петербург
 
 
 class Message:
@@ -59,4 +37,3 @@ class CATEGORY:
         "Животные": "9",
         "Оборудование и запчасти": "10"
     }
-

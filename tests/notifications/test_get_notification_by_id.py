@@ -3,12 +3,12 @@ import pytest
 import requests
 
 from assistant_methods import generate_random_string
-from data import URL, Message
+from data import Message
+from admin_data import URL
 from check_response import check_structure, return_id
 from response_samples import Sample
 
 
-#                                          GET /api/notifications/{id}
 class TestGetNotificationById:
     @allure.title('Можно получить нужное уведомление по id')
     def test_get_notification_by_id_success(self, notification):

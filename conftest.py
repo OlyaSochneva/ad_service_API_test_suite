@@ -1,15 +1,15 @@
 import pytest
 import requests
 
-from data import URL, TestData as Test
+from admin_data import URL, ADMIN
 from assistant_methods import return_user_ntf_id
 from payloads import new_user_payload, notification_payload, new_card_payload, new_service_card_payload
 
 
 @pytest.fixture(scope="session")
 def admin_token():
-    code = requests.post(URL.SEND_CODE, data={'email': Test.USER_ADMIN['email']}).json()["confirmation_code"]
-    access_token = requests.post(URL.LOGIN, data={'email': Test.USER_ADMIN['email'], 'code': code}).json()["access"]
+    code = requests.post(URL.SEND_CODE, data={'email': ADMIN.EMAIL['email']}).json()["confirmation_code"]
+    access_token = requests.post(URL.LOGIN, data={'email': ADMIN.EMAIL['email'], 'code': code}).json()["access"]
     return access_token
 
 
@@ -111,8 +111,8 @@ def dialog(new_dialog):
 
 @pytest.fixture(scope="session")
 def notification(admin_token, user_token):
-    user_id = requests.get(URL.USER_ME, headers={'Authorization': f'Bearer {user_token}'}).json()["id"]
-    payload = notification_payload(user_id)
+    user = requests.get(URL.USER_ME, headers={'Authorization': f'Bearer {user_token}'}).json()["id"]
+    payload = notification_payload(user)
     ntf_id = requests.post(URL.NOTIFICATIONS,
                            headers={'Authorization': f'Bearer {admin_token}'},
                            json=payload).json()["id"]
